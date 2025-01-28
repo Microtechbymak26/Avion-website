@@ -163,6 +163,8 @@ const Checkout = () => {
                   <Image
                     src={item.image.asset.url}
                     alt={item.name}
+                    height={5}
+                    width={5}
                     className="w-12 h-12 object-cover rounded-full"
                   />
                   <span>{item.name} x {item.quantity}</span>

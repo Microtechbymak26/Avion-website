@@ -13,7 +13,7 @@ import { BsCart } from "react-icons/bs";
 import { FiMenu, FiX } from "react-icons/fi"; // Icons for hamburger menu
 import Image from "next/image";
 
-interface Product {
+interface Product{
   _id: string;
   params: any;
   id: string;
@@ -167,11 +167,15 @@ const Page = () => {
             <Image
               src="/Banner.svg"
               alt="Banner"
+              height={2}
+              width={2}
               className="hidden tablet:block w-full object-cover"
             />
             <Image
               src="/Banner.svg"
               alt="Mobile Banner"
+              height={2}
+              width={2}
               className="block tablet:hidden w-full object-cover"
             />
           </div>
