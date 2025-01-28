@@ -13,9 +13,9 @@ import { BsCart } from "react-icons/bs";
 import { FiMenu, FiX } from "react-icons/fi"; // Icons for hamburger menu
 import Image from "next/image";
 
-interface Product{
+interface Product {
   _id: string;
-  params: any;
+  params: { slug: string } & Record<string, unknown>;
   id: string;
   name: string;
   description: string;
@@ -42,7 +42,6 @@ const Page = () => {
   const [products, setProducts] = useState<Product[]>([]);
   const [filteredProducts, setFilteredProducts] = useState<Product[]>([]);
   const [currentPage, setCurrentPage] = useState<number>(1);
-  const [_cart, setCart] = useState<Product[]>([]);
   const [menuOpen, setMenuOpen] = useState(false); // State for the mobile menu
 
   const totalPages = Math.ceil(filteredProducts.length / ITEMS_PER_PAGE);
@@ -59,8 +58,6 @@ const Page = () => {
   const handleAddToCart = (e: React.MouseEvent, product: Product) => {
     e.preventDefault();
     addToCart(product);
-
-    setCart((prevCart) => [...prevCart, product]);
 
     Swal.fire({
       position: "center",
@@ -84,7 +81,7 @@ const Page = () => {
           <nav className="flex items-center justify-between px-5 py-4 tablet:px-10">
             <Link href="/">
               <h1 className="text-lg font-bold text-gray-800 cursor-pointer">
-                 Avion
+                Avion
               </h1>
             </Link>
             {/* Hamburger Menu for Mobile */}
@@ -202,8 +199,8 @@ const Page = () => {
                     <Image
                       src={product.image.asset.url}
                       alt={product.name}
-                      height={5}
-                      width={5}
+                      height={500}
+                      width={500}
                       className="object-cover w-full h-full"
                     />
                   </div>
@@ -244,3 +241,4 @@ const Page = () => {
 };
 
 export default Page;
+
