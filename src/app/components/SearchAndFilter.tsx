@@ -47,7 +47,7 @@ export default function SearchAndFilter({
     }
 
     onFilteredProducts(filtered);
-  }, [searchQuery, selectedCategory, maxPrice, products]);
+  }, [searchQuery, selectedCategory, maxPrice, products, onFilteredProducts]); // Added onFilteredProducts to the dependency array
 
   return (
     <div className="flex flex-col md:flex-row md:items-center justify-between gap-5 bg-white shadow-md p-6 rounded-lg mb-8">

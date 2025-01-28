@@ -32,10 +32,9 @@ const Checkout = () => {
     country: false,
   });
 
-  // Set default values for shipping, tax, and discount
-  const [shipping, setShipping] = useState<number>(0);  // Example shipping fee
-  const [tax, setTax] = useState<number>(0);            // Example tax, can be set dynamically
-  const [discount, setDiscount] = useState<number>(0); // Example discount, can be set dynamically
+  const [shipping, setShipping] = useState<number>(20); // Default shipping fee
+  const [tax, setTax] = useState<number>(0); // Initial tax
+  const [discount, setDiscount] = useState<number>(0); // Initial discount
 
   const router = useRouter();
 
@@ -43,7 +42,22 @@ const Checkout = () => {
     // Mocked cart data fetching
     const cart = localStorage.getItem("cart");
     setCartItems(cart ? JSON.parse(cart) : []);
-  }, []);
+
+    // Dynamically adjust shipping, tax, and discount based on cart value
+    const calculateShippingTaxDiscount = () => {
+      const subtotal = cartItems.reduce(
+        (total, item) => total + item.price * item.quantity,
+        0
+      );
+
+      // Update values dynamically
+      setShipping(subtotal > 100 ? 0 : 20); // Free shipping if subtotal > $100
+      setTax(subtotal * 0.1); // 10% tax on subtotal
+      setDiscount(subtotal > 50 ? 10 : 0); // $10 discount for subtotal > $50
+    };
+
+    calculateShippingTaxDiscount();
+  }, [cartItems]); // Runs whenever cartItems changes
 
   const validateForm = () => {
     const errors = {
@@ -102,7 +116,6 @@ const Checkout = () => {
     });
   };
 
-  // Calculate total price including shipping, tax, and discount
   const calculateTotal = () => {
     const subtotal = cartItems.reduce(
       (total, item) => total + item.price * item.quantity,
@@ -167,9 +180,13 @@ const Checkout = () => {
                     width={5}
                     className="w-12 h-12 object-cover rounded-full"
                   />
-                  <span>{item.name} x {item.quantity}</span>
+                  <span>
+                    {item.name} x {item.quantity}
+                  </span>
                 </div>
-                <span className="text-gray-700 font-semibold">${item.price * item.quantity}</span>
+                <span className="text-gray-700 font-semibold">
+                  ${item.price * item.quantity}
+                </span>
               </li>
             ))}
           </ul>
@@ -190,9 +207,7 @@ const Checkout = () => {
             </div>
           </div>
 
-          <div className="text-right font-bold mt-4">
-            Total: ${calculateTotal()}
-          </div>
+          <div className="text-right font-bold mt-4">Total: ${calculateTotal()}</div>
         </div>
       </div>
 

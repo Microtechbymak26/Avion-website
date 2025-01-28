@@ -42,7 +42,7 @@ const Page = () => {
   const [products, setProducts] = useState<Product[]>([]);
   const [filteredProducts, setFilteredProducts] = useState<Product[]>([]);
   const [currentPage, setCurrentPage] = useState<number>(1);
-  const [cart, setCart] = useState<Product[]>([]);
+  const [_cart, setCart] = useState<Product[]>([]);
   const [menuOpen, setMenuOpen] = useState(false); // State for the mobile menu
 
   const totalPages = Math.ceil(filteredProducts.length / ITEMS_PER_PAGE);
@@ -199,9 +199,11 @@ const Page = () => {
               >
                 <Link href={`/product/${product.slug.current}`}>
                   <div className="relative h-64 w-full overflow-hidden">
-                    <img
+                    <Image
                       src={product.image.asset.url}
                       alt={product.name}
+                      height={5}
+                      width={5}
                       className="object-cover w-full h-full"
                     />
                   </div>
