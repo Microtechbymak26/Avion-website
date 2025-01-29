@@ -134,8 +134,8 @@ const CartPage = () => {
                 <Image
                   src={item.image.asset.url}
                   alt={item.name}
-                  height={5}
-                  width={5}
+                  height={500}
+                  width={500}
                   className="w-full h-48 object-cover rounded-md mb-4"
                 />
                 <h3 className="text-lg font-semibold mb-2">{item.name}</h3>
