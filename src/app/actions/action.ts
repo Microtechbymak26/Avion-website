@@ -3,7 +3,7 @@ import { Product } from "../product/[slug]/page";
 export const addToCart = (product: Product) => {
   const cart: Product[] = JSON.parse(localStorage.getItem('cart') || '[]');
 
-  const existingProductIndex = cart.findIndex((item) => item._id === product.id);
+  const existingProductIndex = cart.findIndex((item) => item._id === product._id);
 
   if (existingProductIndex > -1) {
     cart[existingProductIndex].quantity += 1;
@@ -16,13 +16,13 @@ export const addToCart = (product: Product) => {
 
 export const removeFromCart = (product: Product) => {
   const cart: Product[] = JSON.parse(localStorage.getItem('cart') || '[]');
-  const updatedCart = cart.filter((item) => item._id !== product.id);
+  const updatedCart = cart.filter((item) => item._id !== product._id);
   localStorage.setItem('cart', JSON.stringify(updatedCart));
 };
 
 export const updateQuantity = (product: Product, quantity: number) => {
   const cart: Product[] = JSON.parse(localStorage.getItem('cart') || '[]');
-  const productIndex = cart.findIndex((item) => item._id === product.id);
+  const productIndex = cart.findIndex((item) => item._id === product._id);
 
   if (productIndex > -1) {
     cart[productIndex].quantity = quantity;
