@@ -3,7 +3,7 @@ import { groq } from 'next-sanity';
 
 const productQuery = groq`
   *[_type == "product"]{
-    id,
+    _id,
     name,
     description,
     quantity,

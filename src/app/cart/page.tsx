@@ -14,15 +14,16 @@ const getCartItems = (): Product[] => {
 };
 
 const removeFromCart = (product: Product) => {
+  console.log(product,'products')
   const cart = getCartItems();
-  const updatedCart = cart.filter((item) => item.id !== product.id);
+  const updatedCart = cart.filter((item) => item._id !== product._id);
   localStorage.setItem("cart", JSON.stringify(updatedCart));
 };
 
 const updateQuantity = (product: Product, quantity: number) => {
   const cart = getCartItems();
   const updatedCart = cart.map((item) =>
-    item.id === product.id ? { ...item, quantity } : item
+    item._id === product._id ? { ...item, quantity } : item
   );
   localStorage.setItem("cart", JSON.stringify(updatedCart));
 };
@@ -63,13 +64,13 @@ const CartPage = () => {
 
   // Increment quantity
   const handleIncrement = (product: Product) => {
-    const item = cartItems.find((item) => item.id === product.id);
+    const item = cartItems.find((item) => item._id === product._id);
     if (item) handleQuantity(product, item.quantity + 1);
   };
 
   // Decrement quantity
   const handleDecrement = (product: Product) => {
-    const item = cartItems.find((item) => item.id === product.id);
+    const item = cartItems.find((item) => item._id === product._id);
     if (item) handleQuantity(product, item.quantity - 1);
   };
 
@@ -128,7 +129,7 @@ const CartPage = () => {
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
             {cartItems.map((item) => (
               <div
-                key={item.id}
+                key={item._id}
                 className="bg-white shadow-md rounded-lg p-4 flex flex-col justify-between"
               >
                 <Image
