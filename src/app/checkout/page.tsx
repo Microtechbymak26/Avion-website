@@ -170,7 +170,7 @@ const Checkout = () => {
           <h2 className="text-lg font-bold mb-4">Order Summary</h2>
           <ul className="divide-y divide-gray-200">
             {cartItems.map((item) => (
-              <li key={item.id} className="py-3 flex justify-between items-center">
+              <li key={item._id} className="py-3 flex justify-between items-center">
                 {/* Product Image */}
                 <div className="flex items-center space-x-4">
                   <Image
