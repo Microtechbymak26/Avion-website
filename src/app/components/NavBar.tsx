@@ -2,6 +2,7 @@
 import Image from 'next/image';
 import Link from 'next/link';
 import React, { useState } from 'react';
+import { BsCart } from 'react-icons/bs';
 
 const NavBar = () => {
   const [menuOpen, setMenuOpen] = useState(false);
@@ -18,8 +19,20 @@ const NavBar = () => {
           <Image src="/Search.svg" alt="Search Icon" width={20} height={20} className="hidden tablet:block" />
           <h2 className="font-clash text-2xl font-bold text-[#22202E]">Avion</h2>
           <div className="flex gap-4">
-            <Image src="/ShoppingCart.svg" alt="Shopping Cart" height={20} width={20} className="hidden tablet:block" />
+
+
+            {/* <Image src="/ShoppingCart.svg" alt="Shopping Cart" height={20} width={20} className="hidden tablet:block" /> */}
+                
+                <Link
+                  href="/cart"
+                  className="flex items-center gap-1 hover:text-blue-500 transition"
+                >
+                  <BsCart size={20} />
+                  Cart
+                </Link>
+
             <Image src="/UserAvatar.svg" alt="User Avatar" height={20} width={20} className="hidden tablet:block" />
+
             <Image src="/Search.svg" alt="Search Icon" height={20} width={20} className="block tablet:hidden" />
             {/* Menu icon for mobile */}
             <Image
@@ -42,7 +55,7 @@ const NavBar = () => {
                 <Link href="/">Home</Link>
               </li>
               <li className="hover:text-[#726E8D] hover:bg-gray-100 rounded-md px-2 py-2">
-                <Link href="/about">About</Link>
+                <Link href="/about">About Us</Link>
               </li>
               <li className="hover:text-[#726E8D] hover:bg-gray-100 rounded-md px-2 py-2">
                 <Link href="/itemCart">Item Carts</Link>
@@ -50,11 +63,8 @@ const NavBar = () => {
               <li className="hover:text-[#726E8D] hover:bg-gray-100 rounded-md px-2 py-2">
                 <Link href="/shoppingCart">Shopping Cart</Link>
               </li>
-              <li className="hover:text-[#726E8D] hover:bg-gray-100 rounded-md px-2 py-2">
+               <li className="hover:text-[#726E8D] hover:bg-gray-100 rounded-md px-2 py-2">
                 <Link href="/inventory">Inventory</Link>
-              </li>
-              <li className="hover:text-[#726E8D] hover:bg-gray-100 rounded-md px-2 py-2">
-                <Link href="/cart">Cart</Link>
               </li>
             </ul>
           </div>
@@ -95,7 +105,7 @@ const NavBar = () => {
             </Link>
             <li>
                 <Link href="/cart">Cart</Link>
-              </li> 
+            </li> 
           </ul>
         </div>
       </div>

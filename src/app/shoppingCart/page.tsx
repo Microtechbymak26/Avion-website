@@ -13,6 +13,10 @@ const page = () => {
     </header>
 
     <main>
+
+
+
+      
       <div className='w-full h-auto p-9 laptop-sm:px-[188px] laptop-sm:py-16 relative bg-[#F9F9F9]'>
         <div className='flex flex-col justify-evenly'>
           <h1 className='font-clash text-[24px] tablet:text-[36px] text-[#2A254B] font-normal'>Your shopping cart</h1>

@@ -35,7 +35,7 @@ interface Product {
   };
 }
 
-const ITEMS_PER_PAGE = 4;
+const ITEMS_PER_PAGE = 4 ;
 
 const Page = () => {
   const [products, setProducts] = useState<Product[]>([]);
@@ -84,6 +84,10 @@ const Page = () => {
                 Avion
               </h1>
             </Link>
+              
+              
+
+
             {/* Hamburger Menu for Mobile */}
             <div className="block tablet:hidden">
               {menuOpen ? (
@@ -112,15 +116,20 @@ const Page = () => {
                   About
                 </Link>
               </li>
-              <li>
-                <Link
+              <li 
+              className="hover:text-[#726E8D] hover:bg-gray-100 rounded-md  px-2  ">
+                <Link href="/itemCart">Item Carts</Link>
+              </li>
+              <li className="hover:text-[#726E8D] hover:bg-gray-100 rounded-md  px-2">
+                <Link href="/shoppingCart">Shopping Cart</Link>
+              </li>
+              <Link
                   href="/cart"
                   className="flex items-center gap-1 hover:text-blue-500 transition"
                 >
                   <BsCart size={20} />
                   Cart
                 </Link>
-              </li>
             </ul>
           </nav>
           {/* Mobile Menu */}
@@ -129,7 +138,7 @@ const Page = () => {
               <li className="mb-3">
                 <Link
                   href="/"
-                  className="text-gray-700 hover:text-blue-500 transition"
+                  className="text-gray-700 hover:text-blue-500 transition py-2"
                   onClick={() => setMenuOpen(false)}
                 >
                   Home
@@ -138,22 +147,25 @@ const Page = () => {
               <li className="mb-3">
                 <Link
                   href="/about"
-                  className="text-gray-700 hover:text-blue-500 transition"
+                  className="text-gray-700 hover:text-blue-500 transition py-2"
                   onClick={() => setMenuOpen(false)}
                 >
                   About
                 </Link>
               </li>
-              <li>
-                <Link
+              <li className=" hover:text-blue-500  rounded-md  py-2  ">
+                <Link href="/itemCart">Item Carts</Link>
+              </li>
+              <li className=" hover:text-blue-500 rounded-md  py-2">
+                <Link href="/shoppingCart">Shopping Cart</Link>
+              </li>
+              <Link
                   href="/cart"
-                  className="text-gray-700 hover:text-blue-500 transition flex items-center gap-1"
-                  onClick={() => setMenuOpen(false)}
+                  className="flex items-center gap-1 hover:text-blue-500 transition py-2"
                 >
                   <BsCart size={20} />
                   Cart
                 </Link>
-              </li>
             </ul>
           )}
         </div>
