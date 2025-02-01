@@ -13,9 +13,18 @@ import { BsCart } from "react-icons/bs";
 import { FiMenu, FiX } from "react-icons/fi"; // Icons for hamburger menu
 import Image from "next/image";
 
-interface Product {
+
+export interface Review {
+  author: string;
+  date: string;
+  comment: string;
+  rating: number;
+}
+
+export interface Product {
+  id: string;
+  quantity: number;
   _id: string;
-  params: { slug: string } & Record<string, unknown>;
   name: string;
   description: string;
   slug: { current: string };
@@ -23,7 +32,6 @@ interface Product {
   price: number;
   tags?: string[];
   features?: string[];
-  quantity: number;
   dimensions?: {
     height: number;
     width: number;
@@ -33,7 +41,13 @@ interface Product {
     name: string;
     slug: string;
   };
+  params: {
+    slug: string;
+  };
+  reviews: Review[];  // Added reviews
+  rating: number;     // Added rating
 }
+
 
 const ITEMS_PER_PAGE = 4 ;
 

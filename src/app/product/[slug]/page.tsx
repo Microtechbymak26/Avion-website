@@ -1,9 +1,18 @@
+import ReviewSection from "@/app/components/ReviewSection";
 import { Button } from "@/app/components/ui/button";
 import { client } from "@/sanity/lib/client";
 import { groq } from "next-sanity";
 import Image from "next/image";
 
+export interface Review {
+  author: string;
+  date: string;
+  comment: string;
+  rating: number;
+}
+
 export interface Product {
+  id: string;
   quantity: number;
   _id: string;
   name: string;
@@ -12,7 +21,7 @@ export interface Product {
   image: { asset: { url: string } };
   price: number;
   tags?: string[];
-  features?: string[]; // Typed as string[]
+  features?: string[];
   dimensions?: {
     height: number;
     width: number;
@@ -25,37 +34,48 @@ export interface Product {
   params: {
     slug: string;
   };
+  reviews: Review[];  // Added reviews
+  rating: number;     // Added rating
 }
 
 async function getProducts(slug: string) {
   return client.fetch(
     groq`*[_type == "product" && slug.current == $slug][0]{
-              _id,
-              name,
-              description,
-              quantity,
-              slug,
-              image {
-                asset->{
-                  url
-                }
-              },
-              price,
-              tags,
-              features,
-              dimensions {
-                height,
-                width,
-                depth
-              },
-              category->{
-                name,
-                slug
-              }
-            }`,
+      _id,
+      name,
+      description,
+      quantity,
+      slug,
+      image {
+        asset->{
+          url
+        }
+      },
+      price,
+      tags,
+      features,
+      dimensions {
+        height,
+        width,
+        depth
+      },
+      category->{
+        name,
+        slug
+      },
+      reviews[] {
+        author,
+        date,
+        comment
+      },
+      rating
+    }`,
     { slug }
   );
 }
+
+
+
 
 export default async function ProductPage({
   params,
@@ -63,7 +83,11 @@ export default async function ProductPage({
   params: { slug: string };
 }) {
   const { slug } = params;
-  const product = await getProducts(slug);
+  const product: Product = await getProducts(slug);
+
+
+
+  
 
   return (
     <div className="max-w-7xl mx-auto px-4 py-12">
@@ -143,7 +167,15 @@ export default async function ProductPage({
             Add to Cart
           </Button>
         </div>
+        <ReviewSection reviews={product.reviews} rating={product.rating} productId={product._id} />
+
+      
+
+
       </div>
+
+     
+      
     </div>
   );
 }
