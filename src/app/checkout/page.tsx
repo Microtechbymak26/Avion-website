@@ -5,6 +5,7 @@ import { useRouter } from "next/navigation";
 import { Product } from "../product/[slug]/page";
 import Image from "next/image";
 import { Button } from "../components/ui/button";
+import { client } from "@/sanity/lib/client";
 
 const Checkout = () => {
   const [cartItems, setCartItems] = useState<Product[]>([]);
@@ -83,7 +84,7 @@ const Checkout = () => {
     });
   };
 
-  const handlePlaceOrder = () => {
+  const handlePlaceOrder = async () => {
     if (!validateForm()) {
       Swal.fire({
         title: "Incomplete Form",
@@ -92,7 +93,7 @@ const Checkout = () => {
       });
       return;
     }
-
+  
     Swal.fire({
       title: "Order Successful!",
       text: "You have successfully checked out.",
@@ -114,8 +115,37 @@ const Checkout = () => {
       });
       router.push("/"); // Redirect to the homepage or success page
     });
-  };
 
+
+    const total = calculateTotal();
+
+    const orderData = {
+      _type : 'order',
+      firstName : formValues.firstname,
+      lastName : formValues.lastname,
+      address : formValues.address,
+      city : formValues.city,
+      zipCode : formValues.zipCode,
+      phone : formValues.phone,
+      email : formValues.email,
+      cartItems: cartItems.map(item => ({
+         _type :'reference',
+         _ref : item._id
+      })),
+      total:total,
+      discount : discount,
+      orderDate : new Date().toISOString
+    }
+
+    try {
+      await client.create(orderData)
+      localStorage.removeItem("appliedDiscount")
+    }catch (error){
+      console.error("error creating order",error)
+    }
+
+  };
+  
   const calculateTotal = () => {
     const subtotal = cartItems.reduce(
       (total, item) => total + item.price * item.quantity,
@@ -176,9 +206,9 @@ const Checkout = () => {
                   <Image
                     src={item.image.asset.url}
                     alt={item.name}
-                    height={5}
-                    width={5}
-                    className="w-12 h-12 object-cover rounded-full"
+                    height={500}
+                    width={500}
+                    className="w-14 h-14 object-cover rounded-full"
                   />
                   <span>
                     {item.name} x {item.quantity}

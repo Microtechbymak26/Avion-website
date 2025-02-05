@@ -250,7 +250,7 @@ const Page = () => {
               </div>
             ))}
           </div>
-        </section>
+        </section> 
 
         {/* Pagination Section */}
         <section className="my-10">
