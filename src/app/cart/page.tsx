@@ -6,6 +6,7 @@ import Swal from "sweetalert2";
 import { useRouter } from "next/navigation";
 import { Button } from "../components/ui/button";
 import Image from "next/image";
+import Loader from "../loader/page";
 
 // Mock functions for actions (Replace these with actual API logic or localStorage)
 const getCartItems = (): Product[] => {
@@ -194,6 +195,7 @@ const CartPage = () => {
       )}
 
       <Footer />
+      <Loader/>
     </div>
   );
 };

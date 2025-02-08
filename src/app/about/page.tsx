@@ -14,6 +14,7 @@ import BrandDetails from "../components/BrandDetail";
 import Club from "../components/club";
 import { Button } from "../components/ui/button";
 import { BsCart } from "react-icons/bs";
+import Loader from "../loader/page";
 
 const Page = () => {
   const [menuOpen, setMenuOpen] = useState(false);
@@ -302,6 +303,7 @@ const Page = () => {
           </footer>
         </main>
       </div>
+      <Loader/>
     </>
   );
 };

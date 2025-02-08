@@ -16,6 +16,7 @@ import { Button } from "../components/ui/button";
 import Link from "next/link";
 import { useState } from "react";
 import { BsCart } from "react-icons/bs";
+import Loader from "../loader/page";
 
 const Page = () => {
   const [menuOpen, setMenuOpen] = useState(false);
@@ -261,6 +262,9 @@ const Page = () => {
           </p>
         </div>
       </footer>
+      
+      <Loader/>
+      
     </>
   );
 };

@@ -12,6 +12,7 @@ import { addToCart } from "../actions/action";
 import { BsCart } from "react-icons/bs";
 import { FiMenu, FiX } from "react-icons/fi"; // Icons for hamburger menu
 import Image from "next/image";
+import Loader from "../loader/page";
 
 
 export interface Review {
@@ -262,6 +263,7 @@ const Page = () => {
         </section>
       </main>
       <Footer />
+      <Loader/>
     </>
   );
 };

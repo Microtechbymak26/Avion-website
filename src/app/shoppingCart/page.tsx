@@ -3,6 +3,7 @@ import React from 'react'
 import NavBar from '../components/NavBar'
 import Footer from '../components/Footer'
 import { Button } from '../components/ui/button'
+import Loader from '../loader/page'
 
 
 const page = () => {
@@ -79,6 +80,7 @@ const page = () => {
     <footer>
       <Footer/>
     </footer>
+    <Loader/>
       
     </>
   )

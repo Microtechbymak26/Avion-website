@@ -3,6 +3,7 @@ import Image from 'next/image';
 import Link from 'next/link';
 import React, { useState } from 'react';
 import { BsCart } from 'react-icons/bs';
+import { SignedIn, SignedOut, UserButton, SignInButton } from "@clerk/nextjs";
 
 const NavBar = () => {
   const [menuOpen, setMenuOpen] = useState(false);
@@ -21,8 +22,7 @@ const NavBar = () => {
           <div className="flex gap-4">
 
 
-            {/* <Image src="/ShoppingCart.svg" alt="Shopping Cart" height={20} width={20} className="hidden tablet:block" /> */}
-                
+                        
                 <Link
                   href="/cart"
                   className="flex items-center gap-1 hover:text-blue-500 transition"
@@ -30,8 +30,18 @@ const NavBar = () => {
                   <BsCart size={20} />
                   Cart
                 </Link>
+          
 
-            <Image src="/UserAvatar.svg" alt="User Avatar" height={20} width={20} className="hidden tablet:block" />
+              {/* Clerk Authentication */}
+            <SignedOut>
+              <SignInButton mode="modal" />
+            </SignedOut>
+            <SignedIn>
+              <UserButton afterSignOutUrl="/" />
+            </SignedIn>
+
+
+
 
             <Image src="/Search.svg" alt="Search Icon" height={20} width={20} className="block tablet:hidden" />
             {/* Menu icon for mobile */}
