@@ -33,14 +33,16 @@ const NavBar = () => {
           
 
               {/* Clerk Authentication */}
-            <SignedOut>
-              <SignInButton mode="modal" />
-            </SignedOut>
-            <SignedIn>
-              <UserButton afterSignOutUrl="/" />
-            </SignedIn>
-
-
+              {typeof window !== 'undefined' && (
+  <>
+    <SignedOut>
+      <SignInButton mode="modal" />
+    </SignedOut>
+    <SignedIn>
+      <UserButton afterSignOutUrl="/" />
+    </SignedIn>
+  </>
+)}
 
 
             <Image src="/Search.svg" alt="Search Icon" height={20} width={20} className="block tablet:hidden" />
